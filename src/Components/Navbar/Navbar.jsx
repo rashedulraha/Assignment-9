@@ -51,12 +51,12 @@ const Navbar = () => {
           {/* Desktop Right Side Button */}
           <div className="hidden md:flex items-center space-x-4">
             <Link
-              to="/login"
+              to="/user/login"
               className="flex items-center px-4 py-2 border border-[#0F172A] text-[#0F172A] rounded-lg hover:bg-[#0F172A] hover:text-white transition">
               <FaUser className="mr-2" /> Login
             </Link>
             <Link
-              to="/register"
+              to="/user/register"
               className="flex items-center px-4 py-2 bg-[#FF6B6B] text-white rounded-lg hover:bg-[#FF5252] transition">
               <FaUser className="mr-2" /> Register
             </Link>
@@ -100,12 +100,12 @@ const Navbar = () => {
 
               <div className="pt-4 flex flex-col space-y-3">
                 <Link
-                  to="/login"
+                  to="/user/login"
                   className="flex items-center justify-center px-4 py-2 border border-[#0F172A] text-[#0F172A] rounded-lg hover:bg-[#0F172A] hover:text-white transition">
                   <FaUser className="mr-2" /> Login
                 </Link>
                 <Link
-                  to="/register"
+                  to="/user/register"
                   className="flex items-center justify-center px-4 py-2 bg-[#FF6B6B] text-white rounded-lg hover:bg-[#FF5252] transition">
                   <FaUser className="mr-2" /> Register
                 </Link>

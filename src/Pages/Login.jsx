@@ -4,53 +4,56 @@ import Container from "../Components/Container";
 
 const Login = () => {
   return (
-    <div className="min-h-screen  flex items-center justify-center p-4">
+    <div
+      className="min-h-screen flex items-center justify-center p-4 bg-white"
+      style={{ height: "100vh" }}>
       <Container>
-        <div className="flex flex-col items-center justify-center min-h-[90vh]">
-          {/* Enhanced Login Card */}
-          <div className="bg-white rounded-md border border-[#FF6B6B]  p-8 w-full max-w-md transform transition-all duration-300">
-            <form>
-              <div className="mb-6">
+        <div className="flex flex-col items-center justify-center">
+          <div className="bg-white rounded-md border border-[#FF6B6B] p-6 w-full max-w-md shadow-lg">
+            <form className="space-y-4">
+              <div>
                 <label
                   htmlFor="email"
-                  className="block text-gray-700 font-medium mb-2">
+                  className="block text-gray-700 text-sm font-medium mb-1">
                   Email Address
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <FaEnvelope className="text-gray-400" />
+                  <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none">
+                    <FaEnvelope className="text-gray-400 text-sm" />
                   </div>
                   <input
                     id="email"
+                    name="email"
                     type="email"
-                    className="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B6B] focus:border-transparent transition"
+                    className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF6B6B] focus:border-transparent transition"
                     placeholder="your@email.com"
                     required
                   />
                 </div>
               </div>
 
-              <div className="mb-6">
+              <div>
                 <label
                   htmlFor="password"
-                  className="block text-gray-700 font-medium mb-2">
+                  className="block text-gray-700 text-sm font-medium mb-1">
                   Password
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <FaLock className="text-gray-400" />
+                  <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none">
+                    <FaLock className="text-gray-400 text-sm" />
                   </div>
                   <input
                     id="password"
+                    name="password"
                     type="password"
-                    className="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF6B6B] focus:border-transparent transition"
+                    className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF6B6B] focus:border-transparent transition"
                     placeholder="••••••••"
                     required
                   />
                 </div>
               </div>
 
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center">
                   <input
                     id="remember-me"
@@ -60,27 +63,25 @@ const Login = () => {
                   />
                   <label
                     htmlFor="remember-me"
-                    className="ml-2 block text-sm text-gray-700">
+                    className="ml-2 text-sm text-gray-700">
                     Remember me
                   </label>
                 </div>
-                <div className="text-sm">
-                  <a
-                    href="#"
-                    className="font-medium text-[#4D96FF] hover:text-[#FF6B6B] transition">
-                    Forgot password?
-                  </a>
-                </div>
+                <Link
+                  to="/forgot-password"
+                  className="text-sm text-[#4D96FF] hover:text-[#FF6B6B] transition">
+                  Forgot Password?
+                </Link>
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-[#FF6B6B] text-white py-3 px-4 rounded-lg font-medium hover:bg-[#FF5252] transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF6B6B] shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
-                Sign In
+                className="w-full bg-[#FF6B6B] text-white py-2 px-4 rounded-md font-medium hover:bg-[#FF5252] transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF6B6B] shadow-md">
+                Login
               </button>
             </form>
 
-            <div className="mt-6">
+            <div className="mt-4 text-center">
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
                   <div className="w-full border-t border-gray-300"></div>
@@ -92,17 +93,17 @@ const Login = () => {
                 </div>
               </div>
 
-              <button className="mt-4 w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition duration-300 transform hover:-translate-y-0.5">
+              <button className="mt-3 w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition duration-300">
                 <FaGoogle className="text-red-500 mr-2" />
-                Sign in with Google
+                Login with Google
               </button>
             </div>
 
-            <div className="mt-8 text-center">
+            <div className="mt-4 text-center">
               <p className="text-sm text-gray-600">
-                Don't have an account?{" "}
+                Don’t have an account?{" "}
                 <Link
-                  to="/register"
+                  to="/user/register"
                   className="font-medium text-[#4D96FF] hover:text-[#FF6B6B] transition">
                   Sign up
                 </Link>
