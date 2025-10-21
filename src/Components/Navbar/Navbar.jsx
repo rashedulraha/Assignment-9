@@ -1,7 +1,121 @@
-import React from "react";
+import { useState } from "react";
+import { Link } from "react-router";
+import {
+  FaHome,
+  FaStore,
+  FaUser,
+  FaBars,
+  FaTimes,
+  FaHeart,
+} from "react-icons/fa";
 
 const Navbar = () => {
-  return <div>Navbar</div>;
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <nav className="bg-white shadow-md sticky top-0 z-50">
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center py-4">
+          {/* Logo */}
+          <div className="flex items-center">
+            <Link to="/" className="text-2xl font-bold text-[#FF6B6B]">
+              BayBuzz
+            </Link>
+          </div>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            <Link
+              to="/"
+              className="flex items-center text-[#0F172A] hover:text-[#FF6B6B] transition">
+              <FaHome className="mr-2" /> Home
+            </Link>
+
+            <Link
+              to="/sellers"
+              className="flex items-center text-[#0F172A] hover:text-[#FF6B6B] transition">
+              <FaStore className="mr-2" /> Sellers
+            </Link>
+
+            <Link
+              to="/wishlist"
+              className="flex items-center text-[#0F172A] hover:text-[#FF6B6B] transition">
+              <FaHeart className="mr-2" /> Wishlist
+            </Link>
+          </div>
+
+          {/* Desktop Right Side Button */}
+          <div className="hidden md:flex items-center space-x-4">
+            <Link
+              to="/login"
+              className="flex items-center px-4 py-2 border border-[#0F172A] text-[#0F172A] rounded-lg hover:bg-[#0F172A] hover:text-white transition">
+              <FaUser className="mr-2" /> Login
+            </Link>
+            <Link
+              to="/register"
+              className="flex items-center px-4 py-2 bg-[#FF6B6B] text-white rounded-lg hover:bg-[#FF5252] transition">
+              <FaUser className="mr-2" /> Register
+            </Link>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <button
+              onClick={toggleMenu}
+              className="text-[#0F172A] focus:outline-none">
+              {isOpen ? (
+                <FaTimes className="text-2xl" />
+              ) : (
+                <FaBars className="text-2xl" />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isOpen && (
+          <div className="md:hidden py-4 border-t border-gray-200">
+            <div className="flex flex-col space-y-4">
+              <Link
+                to="/"
+                className="flex items-center text-[#0F172A] hover:text-[#FF6B6B] transition py-2">
+                <FaHome className="mr-2" /> Home
+              </Link>
+
+              <Link
+                to="/sellers"
+                className="flex items-center text-[#0F172A] hover:text-[#FF6B6B] transition py-2">
+                <FaStore className="mr-2" /> Sellers
+              </Link>
+
+              <Link
+                to="/wishlist"
+                className="flex items-center text-[#0F172A] hover:text-[#FF6B6B] transition py-2">
+                <FaHeart className="mr-2" /> Wishlist
+              </Link>
+
+              <div className="pt-4 flex flex-col space-y-3">
+                <Link
+                  to="/login"
+                  className="flex items-center justify-center px-4 py-2 border border-[#0F172A] text-[#0F172A] rounded-lg hover:bg-[#0F172A] hover:text-white transition">
+                  <FaUser className="mr-2" /> Login
+                </Link>
+                <Link
+                  to="/register"
+                  className="flex items-center justify-center px-4 py-2 bg-[#FF6B6B] text-white rounded-lg hover:bg-[#FF5252] transition">
+                  <FaUser className="mr-2" /> Register
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </nav>
+  );
 };
 
 export default Navbar;
