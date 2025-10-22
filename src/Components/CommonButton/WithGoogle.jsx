@@ -1,12 +1,27 @@
 import React, { useContext } from "react";
 import { FaGoogle } from "react-icons/fa";
 import AuthContext from "../../AuthContext/AuthContext";
+import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const WithGoogle = () => {
+  const navigate = useNavigate();
   const { WithGoogle } = useContext(AuthContext);
-  const handleWithGoogle = () => {
-    WithGoogle();
+
+  const handleWithGoogle = async () => {
+    try {
+      const userInformation = await WithGoogle();
+      const user = userInformation?.user;
+
+      if (user) {
+        toast.success("Successfully Login");
+        navigate("/");
+      }
+    } catch {
+      toast.error("Login failed. Try again!");
+    }
   };
+
   return (
     <button
       onClick={handleWithGoogle}

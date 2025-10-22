@@ -2,36 +2,6 @@ import React, { useState } from "react";
 import useCarouselFetch from "../../Hook/useCarouselFetch";
 
 const Carousel = () => {
-  // const slides = [
-  //   {
-  //     id: "slide1",
-  //     image:
-  //       "https://i.pinimg.com/1200x/0c/e2/7a/0ce27aaca629ac2ca2defeba51efe8e2.jpg",
-  //     title: "Welcome to Our Collection",
-  //     description: "Discover amazing products curated just for you",
-  //   },
-  //   {
-  //     id: "slide2",
-  //     image:
-  //       "https://i.pinimg.com/736x/f1/0e/90/f10e9090ac5ec069806c6efe5a5d75c7.jpg",
-  //     title: "New Arrivals",
-  //     description: "Check out our latest additions",
-  //   },
-  //   {
-  //     id: "slide3",
-  //     image:
-  //       "https://i.pinimg.com/1200x/f1/b4/14/f1b4144021ecfcb79c0e52c5db4a09b8.jpg",
-  //     title: "Special Offers",
-  //     description: "Limited time deals",
-  //   },
-  //   {
-  //     id: "slide4",
-  //     image:
-  //       "https://i.pinimg.com/1200x/66/5b/b6/665bb660ac8c55f20d0a01394b0bbd76.jpg",
-  //     title: "Premium Quality",
-  //     description: "Experience excellence",
-  //   },
-  // ];
   const { Carousel } = useCarouselFetch();
   const slides = Carousel.data;
 

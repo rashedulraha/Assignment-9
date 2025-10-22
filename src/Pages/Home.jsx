@@ -19,7 +19,6 @@ const Home = () => {
       <Container>
         {/* slider  */}
         <Carousel />
-
         {/* Popular Toys Section */}
         <section className="py-8">
           <h2 className="text-2xl font-bold text-[#FF6B6B] mb-4 flex items-center">

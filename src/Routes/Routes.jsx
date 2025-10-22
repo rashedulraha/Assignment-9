@@ -8,6 +8,7 @@ import Wishlist from "../Pages/Wishlist";
 import NotFound from "../Pages/NotFound";
 import Home from "../Pages/Home";
 import ForgotPassword from "../Pages/ForgotPassword";
+import OurStoryDetails from "../Pages/OurStoryDetails";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "/wishlist",
         Component: Wishlist,
+      },
+      {
+        path: "/our-story-details",
+        Component: OurStoryDetails,
       },
     ],
   },
