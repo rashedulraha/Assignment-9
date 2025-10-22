@@ -7,6 +7,7 @@ import Sellers from "../Pages/Sellers";
 import Wishlist from "../Pages/Wishlist";
 import NotFound from "../Pages/NotFound";
 import Home from "../Pages/Home";
+import ForgotPassword from "../Pages/ForgotPassword";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
         Component: Login,
       },
       { path: "/user/register", Component: Register },
+      { path: "/user/forgotPassword", Component: ForgotPassword },
     ],
   },
 ]);

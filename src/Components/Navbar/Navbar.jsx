@@ -39,9 +39,9 @@ const Navbar = () => {
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/" className="text-2xl font-bold text-[#FF6B6B]">
+            <a href="/" className="text-2xl font-bold text-[#FF6B6B]">
               BayBuzz
-            </Link>
+            </a>
           </div>
 
           {/* Desktop Navigation */}

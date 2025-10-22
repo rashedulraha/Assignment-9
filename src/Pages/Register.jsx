@@ -1,33 +1,54 @@
 import { Link } from "react-router";
-import { FaGoogle, FaEnvelope, FaLock, FaUser, FaCamera } from "react-icons/fa";
+import { FaEnvelope, FaLock, FaUser, FaCamera } from "react-icons/fa";
 import Container from "../Components/Container";
+import CommonButton from "../Components/CommonButton/CommonButton";
+import WithGoogle from "../Components/CommonButton/WithGoogle";
 
 const Register = () => {
   return (
-    <div
-      className="min-h-screen flex items-center justify-center p-4 bg-white"
-      style={{ height: "100vh" }}>
+    <div className="min-h-screen flex items-center justify-center p-4 bg-white">
       <Container>
         <div className="flex flex-col items-center justify-center">
           <div className="bg-white rounded-md border border-[#FF6B6B] p-6 w-full max-w-md shadow-lg">
             <form className="space-y-4">
-              <div>
-                <label
-                  htmlFor="fullname"
-                  className="block text-gray-700 text-sm font-medium mb-1">
-                  Full Name
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none">
-                    <FaUser className="text-gray-400 text-sm" />
+              <div className="flex flex-col md:flex-row gap-3">
+                <div>
+                  <label
+                    htmlFor="fullname"
+                    className="block text-gray-700 text-sm font-medium mb-1">
+                    Full Name
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none">
+                      <FaUser className="text-gray-400 text-sm" />
+                    </div>
+                    <input
+                      name="fullname"
+                      type="text"
+                      className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF6B6B] focus:border-transparent transition"
+                      placeholder="John Doe"
+                      required
+                    />
                   </div>
-                  <input
-                    name="fullname"
-                    type="text"
-                    className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF6B6B] focus:border-transparent transition"
-                    placeholder="John Doe"
-                    required
-                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="photoUrl"
+                    className="block text-gray-700 text-sm font-medium mb-1">
+                    Photo URL
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none">
+                      <FaCamera className="text-gray-400 text-sm" />
+                    </div>
+                    <input
+                      id="photoUrl"
+                      name="photoUrl"
+                      type="url"
+                      className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF6B6B] focus:border-transparent transition"
+                      placeholder="https://example.com/photo.jpg"
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -71,26 +92,6 @@ const Register = () => {
                 </div>
               </div>
 
-              <div>
-                <label
-                  htmlFor="photoUrl"
-                  className="block text-gray-700 text-sm font-medium mb-1">
-                  Photo URL
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none">
-                    <FaCamera className="text-gray-400 text-sm" />
-                  </div>
-                  <input
-                    id="photoUrl"
-                    name="photoUrl"
-                    type="url"
-                    className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF6B6B] focus:border-transparent transition"
-                    placeholder="https://example.com/photo.jpg"
-                  />
-                </div>
-              </div>
-
               <div className="flex items-center">
                 <input
                   id="agree-terms"
@@ -116,12 +117,7 @@ const Register = () => {
                   </Link>
                 </label>
               </div>
-
-              <button
-                type="submit"
-                className="w-full bg-[#FF6B6B] text-white py-2 px-4 rounded-md font-medium hover:bg-[#FF5252] transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF6B6B] shadow-md">
-                Create Account
-              </button>
+              <CommonButton type={"submit"} name={"Register"} />
             </form>
 
             <div className="mt-4 text-center">
@@ -135,13 +131,8 @@ const Register = () => {
                   </span>
                 </div>
               </div>
-
-              <button className="mt-3 w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition duration-300">
-                <FaGoogle className="text-red-500 mr-2" />
-                Sign up with Google
-              </button>
             </div>
-
+            <WithGoogle />
             <div className="mt-4 text-center">
               <p className="text-sm text-gray-600">
                 Already have an account?{" "}
@@ -149,6 +140,14 @@ const Register = () => {
                   to="/user/login"
                   className="font-medium text-[#4D96FF] hover:text-[#FF6B6B] transition">
                   Sign in
+                </Link>
+              </p>
+              <p className="text-sm text-gray-600 mt-2">
+                Back to{" "}
+                <Link
+                  to="/"
+                  className="font-medium text-[#4D96FF] hover:text-[#FF6B6B] transition">
+                  Home
                 </Link>
               </p>
             </div>

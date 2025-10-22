@@ -1,12 +1,11 @@
 import { Link } from "react-router";
 import { FaGoogle, FaEnvelope, FaLock, FaUser } from "react-icons/fa";
 import Container from "../Components/Container";
+import CommonButton from "../Components/CommonButton/CommonButton";
 
 const Login = () => {
   return (
-    <div
-      className="min-h-screen flex items-center justify-center p-4 bg-white"
-      style={{ height: "100vh" }}>
+    <div className=" h-screen flex items-center justify-center  bg-white">
       <Container>
         <div className="flex flex-col items-center justify-center">
           <div className="bg-white rounded-md border border-[#FF6B6B] p-6 w-full max-w-md shadow-lg">
@@ -22,12 +21,11 @@ const Login = () => {
                     <FaEnvelope className="text-gray-400 text-sm" />
                   </div>
                   <input
-                    id="email"
                     name="email"
                     type="email"
-                    className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF6B6B] focus:border-transparent transition"
                     placeholder="your@email.com"
                     required
+                    className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF6B6B] focus:border-transparent transition"
                   />
                 </div>
               </div>
@@ -43,12 +41,11 @@ const Login = () => {
                     <FaLock className="text-gray-400 text-sm" />
                   </div>
                   <input
-                    id="password"
                     name="password"
                     type="password"
-                    className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF6B6B] focus:border-transparent transition"
                     placeholder="••••••••"
                     required
+                    className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF6B6B] focus:border-transparent transition"
                   />
                 </div>
               </div>
@@ -56,7 +53,6 @@ const Login = () => {
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center">
                   <input
-                    id="remember-me"
                     name="remember-me"
                     type="checkbox"
                     className="h-4 w-4 text-[#FF6B6B] focus:ring-[#FF6B6B] border-gray-300 rounded"
@@ -68,17 +64,13 @@ const Login = () => {
                   </label>
                 </div>
                 <Link
-                  to="/forgot-password"
+                  to="/user/forgotPassword"
                   className="text-sm text-[#4D96FF] hover:text-[#FF6B6B] transition">
                   Forgot Password?
                 </Link>
               </div>
 
-              <button
-                type="submit"
-                className="w-full bg-[#FF6B6B] text-white py-2 px-4 rounded-md font-medium hover:bg-[#FF5252] transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF6B6B] shadow-md">
-                Login
-              </button>
+              <CommonButton type={"submit"} name={"Login"} />
             </form>
 
             <div className="mt-4 text-center">
@@ -106,6 +98,14 @@ const Login = () => {
                   to="/user/register"
                   className="font-medium text-[#4D96FF] hover:text-[#FF6B6B] transition">
                   Sign up
+                </Link>
+              </p>
+              <p className="text-sm text-gray-600 mt-2">
+                Back to{" "}
+                <Link
+                  to="/"
+                  className="font-medium text-[#4D96FF] hover:text-[#FF6B6B] transition">
+                  Home
                 </Link>
               </p>
             </div>
