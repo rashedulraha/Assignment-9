@@ -3,14 +3,36 @@ import { FaEnvelope, FaLock, FaUser, FaCamera } from "react-icons/fa";
 import Container from "../Components/Container";
 import CommonButton from "../Components/CommonButton/CommonButton";
 import WithGoogle from "../Components/CommonButton/WithGoogle";
+import { useContext } from "react";
+import AuthContext from "../AuthContext/AuthContext";
+import { toast } from "react-toastify";
 
 const Register = () => {
+  const { Register } = useContext(AuthContext);
+  // console.log(Register);
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const fullname = e.target.fullname.value;
+    const photoUrl = e.target.photoUrl.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    Register(email, password, fullname, photoUrl)
+      .then(() => {
+        toast.success("Account create successfully");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-white">
       <Container>
         <div className="flex flex-col items-center justify-center">
           <div className="bg-white rounded-md border border-[#FF6B6B] p-6 w-full max-w-md shadow-lg">
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleRegister}>
               <div className="flex flex-col md:flex-row gap-3">
                 <div>
                   <label

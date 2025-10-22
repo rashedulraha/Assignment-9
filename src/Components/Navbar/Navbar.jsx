@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router";
 import {
   FaHome,
@@ -8,106 +8,158 @@ import {
   FaTimes,
   FaHeart,
 } from "react-icons/fa";
-import "../../index.css";
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
+import AuthContext from "../../AuthContext/AuthContext";
+import { toast } from "react-toastify";
+
+const AuthNavbar = ({
+  logo = "BayBuzz",
+  logoColor = "#FF6B6B",
+
+  //! navLink
+  navLinks = [
+    { to: "/", icon: FaHome, label: "Home" },
+    { to: "/sellers", icon: FaStore, label: "Sellers" },
+    { to: "/wishlist", icon: FaHeart, label: "Wishlist" },
+  ],
+
+  // ! Path
+
+  loginPath = "/user/login",
+  registerPath = "/user/register",
+  customClass = "",
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { user, logout } = useContext(AuthContext);
+  console.log(user);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      toast.success("Logout Successfully");
+    } catch (error) {
+      toast.error("Logout failed:", error);
+    }
   };
 
-  const navLink = (
-    <>
-      <div className="flex items-center space-x-8">
-        <NavLink className={"nvaLinkStyle"} to={"/"}>
-          <FaHome className="mr-2" />
-          Home
-        </NavLink>
-        <NavLink className={"nvaLinkStyle"} to={"/seller"}>
-          <FaStore className="mr-2" /> Sellers
-        </NavLink>
-        <NavLink className={"nvaLinkStyle"} to={"/wishlist"}>
-          <FaHeart className="mr-2" /> Wishlist
-        </NavLink>
-      </div>
-    </>
+  const AuthButtons = () => (
+    <div className="flex items-center gap-3">
+      {user ? (
+        <>
+          <div className="relative group">
+            <img
+              src={user.user_metadata?.avatar_url}
+              alt={user.user_metadata?.name || user.displayName || "User"}
+              className="w-10 h-10 rounded-full border-2 border-[#FF6B6B] cursor-pointer"
+              onError={(e) => {
+                e.target.src = "/default-avatar.png";
+              }}
+            />
+            <div className="absolute -top-2 -right-2 bg-green-500 w-5 h-5 rounded-full border-2 border-white"></div>
+            <div className="absolute top-full right-0 mt-2 px-4 py-2 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-all whitespace-nowrap z-50 min-w-[150px]">
+              <p className="text-sm font-medium text-gray-700 truncate max-w-[140px]">
+                {user.user_metadata?.name || user.displayName || user.email}
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={handleLogout}
+            className="px-4 py-2 bg-[#FF6B6B] text-white rounded-lg hover:bg-[#FF5252] transition-all duration-200 font-medium cursor-pointer">
+            Logout
+          </button>
+        </>
+      ) : (
+        <>
+          <Link
+            to={loginPath}
+            className="flex items-center px-4 py-2 border border-[#0F172A] text-[#0F172A] rounded-lg hover:bg-[#0F172A] hover:text-white transition-all duration-200">
+            <FaUser className="mr-2" />
+            Login
+          </Link>
+          <Link
+            to={registerPath}
+            className="flex items-center px-4 py-2 bg-[#FF6B6B] text-white rounded-lg hover:bg-[#FF5252] transition-all duration-200">
+            <FaUser className="mr-2" />
+            Register
+          </Link>
+        </>
+      )}
+    </div>
   );
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
+    <nav className={`bg-white shadow-md sticky top-0 z-50 ${customClass}`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
-          <div className="flex items-center">
-            <a href="/" className="text-2xl font-bold text-[#FF6B6B]">
-              BayBuzz
-            </a>
-          </div>
+          <Link to="/" className="flex items-center">
+            <span className="text-2xl font-bold" style={{ color: logoColor }}>
+              {logo}
+            </span>
+          </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">{navLink}</div>
+          <div className="hidden md:flex items-center space-x-8">
+            {navLinks.map((link, index) => {
+              const Icon = link.icon;
+              return (
+                <NavLink
+                  key={index}
+                  to={link.to}
+                  className={({ isActive }) =>
+                    `nvaLinkStyle flex items-center ${
+                      isActive
+                        ? "text-[#FF6B6B] font-semibold"
+                        : "text-gray-700 hover:text-[#FF6B6B]"
+                    } transition-all duration-200`
+                  }>
+                  <Icon className="mr-2" />
+                  {link.label}
+                </NavLink>
+              );
+            })}
+          </div>
 
-          {/* Desktop Right Side Button */}
+          {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link
-              to="/user/login"
-              className="flex items-center px-4 py-2 border border-[#0F172A] text-[#0F172A] rounded-lg hover:bg-[#0F172A] hover:text-white transition">
-              <FaUser className="mr-2" /> Login
-            </Link>
-            <Link
-              to="/user/register"
-              className="flex items-center px-4 py-2 bg-[#FF6B6B] text-white rounded-lg hover:bg-[#FF5252] transition">
-              <FaUser className="mr-2" /> Register
-            </Link>
+            <AuthButtons />
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button
-              onClick={toggleMenu}
-              className="text-[#0F172A] focus:outline-none">
-              {isOpen ? (
-                <FaTimes className="text-2xl" />
-              ) : (
-                <FaBars className="text-2xl" />
-              )}
-            </button>
-          </div>
+          <button
+            onClick={toggleMenu}
+            className="md:hidden text-[#0F172A] focus:outline-none">
+            {isOpen ? (
+              <FaTimes className="text-2xl" />
+            ) : (
+              <FaBars className="text-2xl" />
+            )}
+          </button>
         </div>
 
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden py-4 border-t border-gray-200">
             <div className="flex flex-col space-y-4">
-              <Link
-                to="/"
-                className="flex items-center text-[#0F172A] hover:text-[#FF6B6B] transition py-2">
-                <FaHome className="mr-2" /> Home
-              </Link>
+              {navLinks.map((link, index) => {
+                const Icon = link.icon;
+                return (
+                  <Link
+                    key={index}
+                    to={link.to}
+                    className="flex items-center text-[#0F172A] hover:text-[#FF6B6B] transition-all duration-200 py-2"
+                    onClick={() => setIsOpen(false)}>
+                    <Icon className="mr-2" />
+                    {link.label}
+                  </Link>
+                );
+              })}
 
-              <Link
-                to="/sellers"
-                className="flex items-center text-[#0F172A] hover:text-[#FF6B6B] transition py-2">
-                <FaStore className="mr-2" /> Sellers
-              </Link>
-
-              <Link
-                to="/wishlist"
-                className="flex items-center text-[#0F172A] hover:text-[#FF6B6B] transition py-2">
-                <FaHeart className="mr-2" /> Wishlist
-              </Link>
-
-              <div className="pt-4 flex flex-col space-y-3">
-                <Link
-                  to="/user/login"
-                  className="flex items-center justify-center px-4 py-2 border border-[#0F172A] text-[#0F172A] rounded-lg hover:bg-[#0F172A] hover:text-white transition">
-                  <FaUser className="mr-2" /> Login
-                </Link>
-                <Link
-                  to="/user/register"
-                  className="flex items-center justify-center px-4 py-2 bg-[#FF6B6B] text-white rounded-lg hover:bg-[#FF5252] transition">
-                  <FaUser className="mr-2" /> Register
-                </Link>
+              {/* Mobile Auth Buttons */}
+              <div className="pt-4 border-t border-gray-200">
+                <AuthButtons />
               </div>
             </div>
           </div>
@@ -117,4 +169,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default AuthNavbar;
