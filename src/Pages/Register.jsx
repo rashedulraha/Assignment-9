@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { FaEnvelope, FaLock, FaUser, FaCamera } from "react-icons/fa";
 import Container from "../Components/Container";
 import CommonButton from "../Components/CommonButton/CommonButton";
@@ -8,7 +8,8 @@ import AuthContext from "../AuthContext/AuthContext";
 import { toast } from "react-toastify";
 
 const Register = () => {
-  const { Register } = useContext(AuthContext);
+  const { Register, loading } = useContext(AuthContext);
+  const navigate = useNavigate();
   // console.log(Register);
 
   const handleRegister = (e) => {
@@ -21,6 +22,7 @@ const Register = () => {
     Register(email, password, fullname, photoUrl)
       .then(() => {
         toast.success("Account create successfully");
+        navigate("/");
       })
       .catch((error) => {
         toast.error(error.message);
@@ -139,7 +141,20 @@ const Register = () => {
                   </Link>
                 </label>
               </div>
-              <CommonButton type={"submit"} name={"Register"} />
+
+              <CommonButton
+                type={"submit"}
+                name={
+                  loading ? (
+                    <>
+                      Registering...{" "}
+                      <span className="loading text-sm loading-spinner text-warning ml-2"></span>{" "}
+                    </>
+                  ) : (
+                    "Register"
+                  )
+                }
+              />
             </form>
 
             <div className="mt-4 text-center">

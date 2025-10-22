@@ -19,7 +19,7 @@ const AuthNavbar = ({
   //! navLink
   navLinks = [
     { to: "/", icon: FaHome, label: "Home" },
-    { to: "/sellers", icon: FaStore, label: "Sellers" },
+    { to: "/seller", icon: FaStore, label: "Sellers" },
     { to: "/wishlist", icon: FaHeart, label: "Wishlist" },
   ],
 

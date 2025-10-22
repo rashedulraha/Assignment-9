@@ -1,8 +1,10 @@
 import {
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
   onAuthStateChanged,
   sendEmailVerification,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
@@ -10,6 +12,9 @@ import AuthContext from "./AuthContext";
 import { auth } from "../FirebaseAuth/Firebase.init";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+
+//! Provider
+const GoogleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -24,7 +29,7 @@ const AuthProvider = ({ children }) => {
         email,
         password
       );
-
+      setLoading(false);
       const user = userInformation?.user;
       await sendEmailVerification(userInformation?.user);
       await updateProfile(user, { displayName: fullname, photoURL: photoUrl });
@@ -54,7 +59,11 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  // ! observer and get user data
+  //! withGoogle
+
+  const WithGoogle = () => {
+    return signInWithPopup(auth, GoogleProvider);
+  };
 
   //! logout user
   const logout = () => {
@@ -67,8 +76,10 @@ const AuthProvider = ({ children }) => {
     user,
     loading,
     logout,
+    WithGoogle,
   };
 
+  // ! observer and get user data
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
