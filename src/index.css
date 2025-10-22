@@ -14,3 +14,11 @@ body {
 p {
   font-family: "Poppins", sans-serif;
 }
+
+.nvaLinkStyle {
+  @apply flex items-center gap-2 text-[#0F172A] hover:text-[#FF6B6B] transition;
+}
+
+.active {
+  @apply text-[#FF6B6B];
+}

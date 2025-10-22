@@ -1,12 +1,5 @@
 import { Link } from "react-router";
-import {
-  FaGoogle,
-  FaEnvelope,
-  FaLock,
-  FaUser,
-  FaUserPlus,
-  FaCamera,
-} from "react-icons/fa";
+import { FaGoogle, FaEnvelope, FaLock, FaUser, FaCamera } from "react-icons/fa";
 import Container from "../Components/Container";
 
 const Register = () => {

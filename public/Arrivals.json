@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "New Toy 1 - Smart Puzzle Cube",
+    "image": "https://i.pinimg.com/1200x/f9/00/b4/f900b494cb5017eec1ebf22c870ef228.jpg",
+    "detailsPage": "article1.html"
+  },
+  {
+    "id": 2,
+    "name": "New Toy 2 - Interactive Robot",
+    "image": "https://i.pinimg.com/736x/1e/1f/42/1e1f42d0eb3a681f04fb54ad402f4d52.jpg",
+    "detailsPage": "article2.html"
+  },
+  {
+    "id": 3,
+    "name": "New Toy 3 - Magic Art Set",
+    "image": "https://i.pinimg.com/736x/68/a5/2a/68a52af7d6633ca3217502e99987254d.jpg",
+    "detailsPage": "article3.html"
+  }
+]

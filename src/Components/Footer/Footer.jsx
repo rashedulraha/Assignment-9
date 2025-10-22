@@ -11,7 +11,7 @@ import { Link } from "react-router";
 
 const Footer = () => {
   return (
-    <footer className=" text-[#0F172A] py-10">
+    <footer className=" text-[#0F172A] py-10 border-t border-yellow-500">
       <Container>
         <div className="flex flex-col md:flex-row justify-between items-start mb-10">
           {/* Logo Section */}

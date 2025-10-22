@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 import {
   FaHome,
   FaStore,
@@ -8,13 +8,30 @@ import {
   FaTimes,
   FaHeart,
 } from "react-icons/fa";
-
+import "../../index.css";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const navLink = (
+    <>
+      <div className="flex items-center space-x-8">
+        <NavLink className={"nvaLinkStyle"} to={"/"}>
+          <FaHome className="mr-2" />
+          Home
+        </NavLink>
+        <NavLink className={"nvaLinkStyle"} to={"/seller"}>
+          <FaStore className="mr-2" /> Sellers
+        </NavLink>
+        <NavLink className={"nvaLinkStyle"} to={"/wishlist"}>
+          <FaHeart className="mr-2" /> Wishlist
+        </NavLink>
+      </div>
+    </>
+  );
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
@@ -28,25 +45,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link
-              to="/"
-              className="flex items-center text-[#0F172A] hover:text-[#FF6B6B] transition">
-              <FaHome className="mr-2" /> Home
-            </Link>
-
-            <Link
-              to="/sellers"
-              className="flex items-center text-[#0F172A] hover:text-[#FF6B6B] transition">
-              <FaStore className="mr-2" /> Sellers
-            </Link>
-
-            <Link
-              to="/wishlist"
-              className="flex items-center text-[#0F172A] hover:text-[#FF6B6B] transition">
-              <FaHeart className="mr-2" /> Wishlist
-            </Link>
-          </div>
+          <div className="hidden md:flex items-center space-x-8">{navLink}</div>
 
           {/* Desktop Right Side Button */}
           <div className="hidden md:flex items-center space-x-4">
