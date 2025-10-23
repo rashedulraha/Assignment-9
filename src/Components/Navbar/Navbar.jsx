@@ -12,8 +12,8 @@ import {
 import AuthContext from "../../AuthContext/AuthContext";
 import { toast } from "react-toastify";
 
-const AuthNavbar = ({
-  logo = "BayBuzz",
+const Navbar = ({
+  logo = "BabyBuzz",
   logoColor = "#FF6B6B",
 
   //! navLink
@@ -24,14 +24,13 @@ const AuthNavbar = ({
   ],
 
   // ! Path
-
   loginPath = "/user/login",
   registerPath = "/user/register",
   customClass = "",
+  //!
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, logout } = useContext(AuthContext);
-  console.log(user);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -89,6 +88,27 @@ const AuthNavbar = ({
     </div>
   );
 
+  // Navigation Link Component for both desktop and mobile
+  const NavItem = ({ link, isMobile = false }) => {
+    const Icon = link.icon;
+
+    return (
+      <NavLink
+        to={link.to}
+        className={({ isActive }) =>
+          `flex items-center ${
+            isActive
+              ? "text-[#FF6B6B] font-semibold"
+              : "text-gray-700 hover:text-[#FF6B6B]"
+          } transition-all duration-200 ${isMobile ? "py-2" : ""}`
+        }
+        onClick={() => isMobile && setIsOpen(false)}>
+        <Icon className="mr-2" />
+        {link.label}
+      </NavLink>
+    );
+  };
+
   return (
     <nav className={`bg-white shadow-md sticky top-0 z-50 ${customClass}`}>
       <div className="container mx-auto px-4">
@@ -102,32 +122,17 @@ const AuthNavbar = ({
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link, index) => {
-              const Icon = link.icon;
-              return (
-                <NavLink
-                  key={index}
-                  to={link.to}
-                  className={({ isActive }) =>
-                    `nvaLinkStyle flex items-center ${
-                      isActive
-                        ? "text-[#FF6B6B] font-semibold"
-                        : "text-gray-700 hover:text-[#FF6B6B]"
-                    } transition-all duration-200`
-                  }>
-                  <Icon className="mr-2" />
-                  {link.label}
-                </NavLink>
-              );
-            })}
+            {navLinks.map((link, index) => (
+              <NavItem key={index} link={link} />
+            ))}
           </div>
 
-          {/* Desktop Auth Buttons */}
+          {/*! Desktop Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
             <AuthButtons />
           </div>
 
-          {/* Mobile Menu Button */}
+          {/*! Mobile Menu Button */}
           <button
             onClick={toggleMenu}
             className="md:hidden text-[#0F172A] focus:outline-none">
@@ -139,23 +144,13 @@ const AuthNavbar = ({
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/*! Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden py-4 border-t border-gray-200">
             <div className="flex flex-col space-y-4">
-              {navLinks.map((link, index) => {
-                const Icon = link.icon;
-                return (
-                  <Link
-                    key={index}
-                    to={link.to}
-                    className="flex items-center text-[#0F172A] hover:text-[#FF6B6B] transition-all duration-200 py-2"
-                    onClick={() => setIsOpen(false)}>
-                    <Icon className="mr-2" />
-                    {link.label}
-                  </Link>
-                );
-              })}
+              {navLinks.map((link, index) => (
+                <NavItem key={index} link={link} isMobile={true} />
+              ))}
 
               {/* Mobile Auth Buttons */}
               <div className="pt-4 border-t border-gray-200">
@@ -169,4 +164,4 @@ const AuthNavbar = ({
   );
 };
 
-export default AuthNavbar;
+export default Navbar;

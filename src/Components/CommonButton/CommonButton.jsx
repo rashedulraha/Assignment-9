@@ -6,7 +6,7 @@ const CommonButton = (props) => {
   return (
     <button
       type={type}
-      className="w-full bg-[#FF6B6B] text-white py-2 px-4 rounded-md font-medium hover:bg-[#FF5252] transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF6B6B] shadow-md cursor-pointer">
+      className="btn w-full bg-[#FF6B6B] text-white font-medium hover:bg-[#FF5252] transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF6B6B] border-none cursor-pointer shadow-none">
       {name}
     </button>
   );

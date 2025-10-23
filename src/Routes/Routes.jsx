@@ -9,6 +9,7 @@ import NotFound from "../Pages/NotFound";
 import Home from "../Pages/Home";
 import ForgotPassword from "../Pages/ForgotPassword";
 import OurStoryDetails from "../Pages/OurStoryDetails";
+import Details from "../Pages/Details";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/our-story-details",
         Component: OurStoryDetails,
+      },
+      {
+        path: "/details/:id",
+        Component: Details,
       },
     ],
   },
