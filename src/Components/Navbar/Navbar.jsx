@@ -47,9 +47,12 @@ const Navbar = ({
     <div className="flex items-center gap-3">
       {user ? (
         <>
-          <div className="relative group">
+          <Link to={"/profile"} className="relative group">
             <img
-              src={user.user_metadata?.avatar_url}
+              src={
+                user.user_metadata?.avatar_url ||
+                `https://cdn-icons-png.flaticon.com/512/428/428573.png`
+              }
               alt={user.user_metadata?.name || user.displayName || "User"}
               className="w-10 h-10 rounded-full border-2 border-[#FF6B6B] cursor-pointer"
               onError={(e) => {
@@ -62,7 +65,9 @@ const Navbar = ({
                 {user.user_metadata?.name || user.displayName || user.email}
               </p>
             </div>
-          </div>
+          </Link>
+
+          {/* Logout */}
           <button
             onClick={handleLogout}
             className="px-4 py-2 bg-[#FF6B6B] text-white rounded-lg hover:bg-[#FF5252] transition-all duration-200 font-medium cursor-pointer">

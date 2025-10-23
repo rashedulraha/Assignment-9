@@ -10,6 +10,7 @@ import Home from "../Pages/Home";
 import ForgotPassword from "../Pages/ForgotPassword";
 import OurStoryDetails from "../Pages/OurStoryDetails";
 import Details from "../Pages/Details";
+import PrivetRoutes from "../PrivetRoutes/PrivetRoutes";
 
 const router = createBrowserRouter([
   {
@@ -20,19 +21,31 @@ const router = createBrowserRouter([
       { index: true, Component: Home },
       {
         path: "/seller",
-        Component: Sellers,
+        element: (
+          <PrivetRoutes>
+            <Sellers />
+          </PrivetRoutes>
+        ),
       },
       {
         path: "/wishlist",
-        Component: Wishlist,
+        element: (
+          <PrivetRoutes>
+            <Wishlist />
+          </PrivetRoutes>
+        ),
+      },
+      {
+        path: "/details/:id",
+        element: (
+          <PrivetRoutes>
+            <Details />
+          </PrivetRoutes>
+        ),
       },
       {
         path: "/our-story-details",
         Component: OurStoryDetails,
-      },
-      {
-        path: "/details/:id",
-        Component: Details,
       },
     ],
   },

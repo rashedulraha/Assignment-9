@@ -13,7 +13,9 @@ const Arrival = ({ Arrivals }) => {
         />
       </figure>
       <h3 className="text-xl font-semibold text-[#0F172A] mb-2">{name}</h3>
-      <button className="w-full bg-[#FFD93D] text-[#0F172A] py-2 px-4 rounded-md font-medium hover:bg-[#FF6B6B] hover:text-white transition duration-300 ">
+      <button
+        disabled
+        className="w-full bg-[#FFD93D] text-[#0F172A] py-2 px-4 rounded-md font-medium hover:bg-[#FF6B6B] hover:text-white transition duration-300 disabled:cursor-not-allowed disabled:hover:bg-gray-300 disabled:hover:text-gray-500 ">
         View Details
       </button>
     </div>

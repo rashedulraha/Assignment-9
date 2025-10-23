@@ -1,5 +1,13 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { FaEnvelope, FaLock, FaUser, FaCamera } from "react-icons/fa";
+import {
+  FaEnvelope,
+  FaLock,
+  FaUser,
+  FaCamera,
+  FaEye,
+  FaEyeSlash,
+} from "react-icons/fa";
 import Container from "../Components/Container";
 import CommonButton from "../Components/CommonButton/CommonButton";
 import WithGoogle from "../Components/CommonButton/WithGoogle";
@@ -10,6 +18,8 @@ import { toast } from "react-toastify";
 const Register = () => {
   const { Register, loading } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+
   // console.log(Register);
 
   const handleRegister = (e) => {
@@ -19,6 +29,15 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
+    const RegEx = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+    if (!RegEx.test(password)) {
+      toast.error(
+        `Must contain an uppercase letter, lowercase Length  must be at least 6 characters.`
+      );
+      return;
+    }
+
     Register(email, password, fullname, photoUrl)
       .then(() => {
         toast.success("Account create successfully");
@@ -27,6 +46,10 @@ const Register = () => {
       .catch((error) => {
         toast.error(error.message);
       });
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -108,12 +131,25 @@ const Register = () => {
                   </div>
                   <input
                     name="password"
-                    type="password"
-                    className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF6B6B] focus:border-transparent transition"
+                    type={showPassword ? "text" : "password"}
+                    className="w-full pl-8 pr-10 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF6B6B] focus:border-transparent transition"
                     placeholder="••••••••"
                     required
                   />
+                  <button
+                    type="button"
+                    onClick={togglePasswordVisibility}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-[#FF6B6B] transition-colors"
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }>
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </button>
                 </div>
+                <p className="text-xs text-gray-500 mt-1">
+                  Must contain an uppercase letter, lowercase letter, and be at
+                  least 6 characters long.
+                </p>
               </div>
 
               <div className="flex items-center">

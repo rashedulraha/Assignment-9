@@ -1,5 +1,13 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { FaGoogle, FaEnvelope, FaLock, FaUser } from "react-icons/fa";
+import {
+  FaGoogle,
+  FaEnvelope,
+  FaLock,
+  FaUser,
+  FaEye,
+  FaEyeSlash,
+} from "react-icons/fa";
 import Container from "../Components/Container";
 import CommonButton from "../Components/CommonButton/CommonButton";
 import { useContext } from "react";
@@ -10,6 +18,7 @@ import WithGoogle from "../Components/CommonButton/WithGoogle";
 const Login = () => {
   const navigate = useNavigate();
   const { LoginUser, loading } = useContext(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
 
   //!  form functionality
 
@@ -29,6 +38,10 @@ const Login = () => {
       .catch((error) => {
         toast.error(error.message);
       });
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -72,11 +85,20 @@ const Login = () => {
                     </div>
                     <input
                       name="password"
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       placeholder="••••••••"
                       required
-                      className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF6B6B] focus:border-transparent transition"
+                      className="w-full pl-8 pr-10 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF6B6B] focus:border-transparent transition"
                     />
+                    <button
+                      type="button"
+                      onClick={togglePasswordVisibility}
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-[#FF6B6B] transition-colors"
+                      aria-label={
+                        showPassword ? "Hide password" : "Show password"
+                      }>
+                      {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </button>
                   </div>
                 </div>
 
@@ -118,7 +140,7 @@ const Login = () => {
               <WithGoogle />
               <div className="mt-4 text-center">
                 <p className="text-sm text-gray-600">
-                  Don’t have an account?{" "}
+                  Don't have an account?{" "}
                   <Link
                     to="/user/register"
                     className="font-medium text-[#4D96FF] hover:text-[#FF6B6B] transition">

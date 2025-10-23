@@ -6,7 +6,6 @@ import Card from "../Components/Card/Card";
 const Sellers = () => {
   const { product } = useProductFetch();
   const allSellerProduct = product?.data;
-  // console.log(allSellerProduct);
 
   return (
     <>
@@ -22,3 +21,4 @@ const Sellers = () => {
 };
 
 export default Sellers;
+//
