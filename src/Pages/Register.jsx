@@ -7,6 +7,7 @@ import {
   FaCamera,
   FaEye,
   FaEyeSlash,
+  FaArrowLeft,
 } from "react-icons/fa";
 import Container from "../Components/Container";
 import CommonButton from "../Components/CommonButton/CommonButton";
@@ -19,8 +20,6 @@ const Register = () => {
   const { Register, loading } = useContext(AuthContext);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-
-  // console.log(Register);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -44,7 +43,7 @@ const Register = () => {
         navigate("/");
       })
       .catch((error) => {
-        toast.error(error.message);
+        // toast.error(error.message);
       });
   };
 
@@ -53,10 +52,24 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-white">
+    <div className="h-screen flex items-center justify-center bg-white overflow-hidden">
       <Container>
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center h-full">
           <div className="bg-white rounded-md border border-[#FF6B6B] p-6 w-full max-w-md shadow-lg">
+            {/* Back button */}
+            <div className="flex items-center">
+              <Link
+                to="/"
+                className="flex items-center text-[#4D96FF] hover:text-[#FF6B6B] transition">
+                <FaArrowLeft className="mr-2" /> Back
+              </Link>
+            </div>
+
+            {/* Header */}
+            <h2 className="text-2xl font-bold  text-[#FF6B6B] mb-2 text-center">
+              Create Your Account
+            </h2>
+
             <form className="space-y-4" onSubmit={handleRegister}>
               <div className="flex flex-col md:flex-row gap-3">
                 <div>
@@ -213,14 +226,6 @@ const Register = () => {
                   to="/user/login"
                   className="font-medium text-[#4D96FF] hover:text-[#FF6B6B] transition">
                   Sign in
-                </Link>
-              </p>
-              <p className="text-sm text-gray-600 mt-2">
-                Back to{" "}
-                <Link
-                  to="/"
-                  className="font-medium text-[#4D96FF] hover:text-[#FF6B6B] transition">
-                  Home
                 </Link>
               </p>
             </div>

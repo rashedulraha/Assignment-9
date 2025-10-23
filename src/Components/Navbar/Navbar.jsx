@@ -7,6 +7,7 @@ import {
   FaBars,
   FaTimes,
   FaHeart,
+  FaIdCard,
 } from "react-icons/fa";
 
 import AuthContext from "../../AuthContext/AuthContext";
@@ -30,7 +31,7 @@ const Navbar = ({
   //!
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, logout, authInitialized } = useContext(AuthContext); // Add authInitialized
+  const { user, logout, authInitialized } = useContext(AuthContext);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -114,6 +115,27 @@ const Navbar = ({
     );
   };
 
+  // profile NavLink
+  const ProfileLink = () => {
+    if (!user) return null;
+
+    return (
+      <NavLink
+        to="/profile"
+        className={({ isActive }) =>
+          `flex items-center ${
+            isActive
+              ? "text-[#FF6B6B] font-semibold"
+              : "text-gray-700 hover:text-[#FF6B6B]"
+          } transition-all duration-200`
+        }
+        onClick={() => setIsOpen(false)}>
+        <FaIdCard className="mr-2" />
+        My Profile
+      </NavLink>
+    );
+  };
+
   // Show a loading state while auth is being initialized
   if (!authInitialized) {
     return (
@@ -164,14 +186,16 @@ const Navbar = ({
             {navLinks.map((link, index) => (
               <NavItem key={index} link={link} />
             ))}
+            {/* Add Profile Link to Desktop Navigation */}
+            <ProfileLink />
           </div>
 
-          {/*! Desktop Auth Buttons */}
+          {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
             <AuthButtons />
           </div>
 
-          {/*! Mobile Menu Button */}
+          {/* Mobile Menu Button */}
           <button
             onClick={toggleMenu}
             className="md:hidden text-[#0F172A] focus:outline-none">
@@ -183,13 +207,15 @@ const Navbar = ({
           </button>
         </div>
 
-        {/*! Mobile Navigation */}
+        {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden py-4 border-t border-gray-200">
             <div className="flex flex-col space-y-4">
               {navLinks.map((link, index) => (
                 <NavItem key={index} link={link} isMobile={true} />
               ))}
+              {/* Add Profile Link to Mobile Navigation */}
+              <ProfileLink isMobile={true} />
 
               {/* Mobile Auth Buttons */}
               <div className="pt-4 border-t border-gray-200">

@@ -7,6 +7,7 @@ import {
   FaUser,
   FaEye,
   FaEyeSlash,
+  FaArrowLeft,
 } from "react-icons/fa";
 import Container from "../Components/Container";
 import CommonButton from "../Components/CommonButton/CommonButton";
@@ -36,7 +37,7 @@ const Login = () => {
         navigate("/");
       })
       .catch((error) => {
-        toast.error(error.message);
+        // toast.error(error.message);
       });
   };
 
@@ -45,14 +46,31 @@ const Login = () => {
   };
 
   return (
-    <div className=" h-screen flex items-center justify-center  bg-white">
+    <div className="h-screen flex items-center justify-center bg-white">
       {loading ? (
         <span className="loading loading-spinner text-error"></span>
       ) : (
         <Container>
           <div className="flex flex-col items-center justify-center">
             <div className="bg-white rounded-md border border-[#FF6B6B] p-6 w-full max-w-md shadow-lg">
-              <form className="space-y-4 " onSubmit={handleLogin}>
+              {/* Back button */}
+              <div className="flex items-center mb-4">
+                <Link
+                  to="/"
+                  className="flex items-center text-[#4D96FF] hover:text-[#FF6B6B] transition">
+                  <FaArrowLeft className="mr-2" /> Back
+                </Link>
+              </div>
+
+              {/* Header */}
+              <h2 className="text-2xl font-bold text-[#FF6B6B] mb-2 text-center">
+                Login to Your Account
+              </h2>
+              <p className="text-gray-600 text-center mb-6">
+                Welcome back! Please enter your credentials
+              </p>
+
+              <form className="space-y-4" onSubmit={handleLogin}>
                 <div>
                   <label
                     htmlFor="email"
@@ -145,14 +163,6 @@ const Login = () => {
                     to="/user/register"
                     className="font-medium text-[#4D96FF] hover:text-[#FF6B6B] transition">
                     Sign up
-                  </Link>
-                </p>
-                <p className="text-sm text-gray-600 mt-2">
-                  Back to{" "}
-                  <Link
-                    to="/"
-                    className="font-medium text-[#4D96FF] hover:text-[#FF6B6B] transition">
-                    Home
                   </Link>
                 </p>
               </div>
