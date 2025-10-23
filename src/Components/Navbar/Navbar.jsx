@@ -30,7 +30,7 @@ const Navbar = ({
   //!
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout, authInitialized } = useContext(AuthContext); // Add authInitialized
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -113,6 +113,40 @@ const Navbar = ({
       </NavLink>
     );
   };
+
+  // Show a loading state while auth is being initialized
+  if (!authInitialized) {
+    return (
+      <nav className={`bg-white shadow-md sticky top-0 z-50 ${customClass}`}>
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-center py-4">
+            {/* Logo */}
+            <Link to="/" className="flex items-center">
+              <span className="text-2xl font-bold" style={{ color: logoColor }}>
+                {logo}
+              </span>
+            </Link>
+
+            {/* Loading indicator */}
+            <div className="flex items-center space-x-4">
+              <span className="loading loading-spinner text-[#FF6B6B]"></span>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={toggleMenu}
+              className="md:hidden text-[#0F172A] focus:outline-none">
+              {isOpen ? (
+                <FaTimes className="text-2xl" />
+              ) : (
+                <FaBars className="text-2xl" />
+              )}
+            </button>
+          </div>
+        </div>
+      </nav>
+    );
+  }
 
   return (
     <nav className={`bg-white shadow-md sticky top-0 z-50 ${customClass}`}>

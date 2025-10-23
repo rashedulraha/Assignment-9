@@ -11,6 +11,7 @@ import ForgotPassword from "../Pages/ForgotPassword";
 import OurStoryDetails from "../Pages/OurStoryDetails";
 import Details from "../Pages/Details";
 import PrivetRoutes from "../PrivetRoutes/PrivetRoutes";
+import Profile from "../Pages/Profile";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "/our-story-details",
         Component: OurStoryDetails,
+      },
+      {
+        path: "/profile",
+        Component: Profile,
       },
     ],
   },
